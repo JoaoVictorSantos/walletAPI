@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 public class WalletDTO {
 
     private Long id;
-    @Length(min = 3, message = "O Nome deve conter pelo meno 3 caracteres")
-    @NotNull
+    @Length(min = 3, message = "O Nome deve conter pelo meno 3 caracteres.")
+    @NotNull(message = "O Nome não pode ser nulo.")
     private String name;
-    @NotNull
+    @NotNull(message = "Insira um valor para a carteira.")
     private BigDecimal value;
 }
