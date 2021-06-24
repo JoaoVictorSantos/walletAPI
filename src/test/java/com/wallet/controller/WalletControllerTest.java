@@ -65,7 +65,7 @@ public class WalletControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.errors[0]").value("O Nome deve conter pelo meno 3 caracteres"));
+                .andExpect(jsonPath("$.errors[0]").value("O Nome deve conter pelo meno 3 caracteres."));
     }
 
     public Wallet getMockWallet() {
