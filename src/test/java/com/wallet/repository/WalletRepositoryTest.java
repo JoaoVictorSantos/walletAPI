@@ -22,11 +22,6 @@ public class WalletRepositoryTest {
     @Autowired
     WalletRepository repository;
 
-    @After
-    public void tearDown() {
-        repository.deleteAll();
-    }
-
     @Test
     public void testSave() {
         Wallet wallet = new Wallet();
