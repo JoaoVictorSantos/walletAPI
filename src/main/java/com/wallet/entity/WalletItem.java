@@ -1,5 +1,6 @@
 package com.wallet.entity;
 
+import com.wallet.enums.TypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,7 +35,8 @@ public class WalletItem implements Serializable {
     private Date date;
 
     @NotNull
-    private String type;
+    @Enumerated(EnumType.STRING)
+    private TypeEnum type;
 
     @NotNull
     private String description;
