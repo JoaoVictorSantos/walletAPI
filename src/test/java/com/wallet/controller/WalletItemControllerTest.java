@@ -89,7 +89,7 @@ public class WalletItemControllerTest {
         mvc.perform(MockMvcRequestBuilders.get(URL + "/1?startDate=" + startDate + "&endDate=" + endDate)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.content[0].id").value(1L))
                 .andExpect(jsonPath("$.data.content[0].description").value(DESCRIPTION))
                 .andExpect(jsonPath("$.data.content[0].date").value(TODAY.format(getDateFormatter())))
@@ -112,10 +112,10 @@ public class WalletItemControllerTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.data.[0].id").value(1L))
         .andExpect(jsonPath("$.data.[0].type").value(TYPE.getValue()))
-        .andExpect(jsonPath("$.data.content[0].description").value(DESCRIPTION))
-        .andExpect(jsonPath("$.data.content[0].date").value(TODAY.format(getDateFormatter())))
-        .andExpect(jsonPath("$.data.content[0].value").value(VALUE))
-        .andExpect(jsonPath("$.data.content[0].wallet").value(1L));
+        .andExpect(jsonPath("$.data.[0].description").value(DESCRIPTION))
+        .andExpect(jsonPath("$.data.[0].date").value(TODAY.format(getDateFormatter())))
+        .andExpect(jsonPath("$.data.[0].value").value(VALUE))
+        .andExpect(jsonPath("$.data.[0].wallet").value(1L));
     }
 
     @Test
@@ -148,12 +148,12 @@ public class WalletItemControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data.[0].id").value(1L))
-                .andExpect(jsonPath("$.data.[0].type").value(TYPE.getValue()))
-                .andExpect(jsonPath("$.data.content[0].description").value(description))
-                .andExpect(jsonPath("$.data.content[0].date").value(TODAY.format(getDateFormatter())))
-                .andExpect(jsonPath("$.data.content[0].value").value(VALUE))
-                .andExpect(jsonPath("$.data.content[0].wallet").value(1L));
+                .andExpect(jsonPath("$.data.id").value(1L))
+                .andExpect(jsonPath("$.data.type").value(TypeEnum.SD.getValue()))
+                .andExpect(jsonPath("$.data.description").value(description))
+                .andExpect(jsonPath("$.data.date").value(TODAY.format(getDateFormatter())))
+                .andExpect(jsonPath("$.data.value").value(VALUE))
+                .andExpect(jsonPath("$.data.wallet").value(1L));
 
     }
 
@@ -172,7 +172,7 @@ public class WalletItemControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.data").doesNotExist())
-                .andExpect(jsonPath("$.errors[0]").value("Você não pode alterar uma carteira."));
+                .andExpect(jsonPath("$.errors[0]").value("Você não pode alterar a carteira."));
 
     }
 
@@ -199,7 +199,7 @@ public class WalletItemControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data").value("Carteira de id " + ID + " apagado com sucesso."));
+                .andExpect(jsonPath("$.data").value("WalletItem de id " + ID + " apagada com sucesso."));
     }
 
     @Test
@@ -212,7 +212,7 @@ public class WalletItemControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.data").doesNotExist())
-                .andExpect(jsonPath("$.errors[0]").value("Carteira de id 99 não encontrado."));
+                .andExpect(jsonPath("$.errors[0]").value("WalletItem de id 99 não encontrada."));
     }
 
     private WalletItem getMockWalletItem() {
