@@ -1,7 +1,5 @@
 package com.wallet.repository;
 
-import static org.junit.Assert.assertNotNull;
-
 import com.wallet.entity.User;
 import com.wallet.entity.UserWallet;
 import com.wallet.entity.Wallet;
@@ -14,6 +12,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.util.Optional;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -46,6 +47,18 @@ public class UserWalletRepositoryTest {
 
         UserWallet response = repository.save(uw);
         assertNotNull(response);
+    }
+
+    @Test
+    public void testFindByUserIdAndWalletId(){
+        UserWallet uw = new UserWallet();
+        uw.setUsers(getUser());
+        uw.setWallet(getWallet());
+
+        repository.save(uw);
+        Optional<UserWallet> response = repository.findByUsersIdAndWalletId(ID, ID);
+        assertTrue(response.isPresent());
+        assertNotNull(response.get());
     }
 
     private User getUser(){

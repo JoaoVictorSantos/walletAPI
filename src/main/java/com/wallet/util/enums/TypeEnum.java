@@ -1,4 +1,4 @@
-package com.wallet.enums;
+package com.wallet.util.enums;
 
 public enum TypeEnum {
 

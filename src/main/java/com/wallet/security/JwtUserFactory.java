@@ -7,7 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.wallet.entity.User;
-import com.wallet.enums.RoleEnum;
+import com.wallet.util.enums.RoleEnum;
 
 import lombok.NoArgsConstructor;
 

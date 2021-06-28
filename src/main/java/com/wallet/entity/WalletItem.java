@@ -1,6 +1,6 @@
 package com.wallet.entity;
 
-import com.wallet.enums.TypeEnum;
+import com.wallet.util.enums.TypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

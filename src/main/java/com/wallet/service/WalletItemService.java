@@ -1,7 +1,7 @@
 package com.wallet.service;
 
 import com.wallet.entity.WalletItem;
-import com.wallet.enums.TypeEnum;
+import com.wallet.util.enums.TypeEnum;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;

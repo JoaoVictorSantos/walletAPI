@@ -2,7 +2,7 @@ package com.wallet.repository;
 
 import com.wallet.entity.Wallet;
 import com.wallet.entity.WalletItem;
-import com.wallet.enums.TypeEnum;
+import com.wallet.util.enums.TypeEnum;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -15,7 +15,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -45,6 +47,24 @@ public class UserWalletServiceTest {
 
         UserWallet response = service.save(uw);
         assertNotNull(response);
+    }
+
+    @Test
+    public void testFindByUserIdAndWalletId() {
+        UserWallet uw = new UserWallet();
+        uw.setUsers(getUser());
+        uw.setWallet(getWallet());
+
+        BDDMockito.given(repository.findByUsersIdAndWalletId(Mockito.anyLong(), Mockito.anyLong()))
+        .willReturn(Optional.of(uw));
+
+        Optional<UserWallet> response = service
+            .findByUsersIdAndWalletId(uw.getUsers().getId(), uw.getWallet().getId());
+
+        assertTrue(response.isPresent());
+        assertNotNull(response.get());
+        assertEquals(response.get().getUsers().getId(), uw.getUsers().getId());
+        assertEquals(response.get().getWallet().getId(), uw.getWallet().getId());
     }
 
     private User getUser(){

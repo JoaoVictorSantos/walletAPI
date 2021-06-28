@@ -16,6 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -40,6 +41,7 @@ public class UserWalletControllerTest {
     UserWalletService service;
 
     @Test
+    @WithMockUser
     public void testSave() throws Exception {
         BDDMockito.given(service.save(Mockito.any(UserWallet.class)))
             .willReturn(getMockUserWallet());
@@ -55,6 +57,7 @@ public class UserWalletControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void testSaveInvalid() throws Exception {
         BDDMockito.given(service.save(Mockito.any(UserWallet.class)))
                 .willReturn(getMockUserWallet());
