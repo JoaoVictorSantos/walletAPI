@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
@@ -114,6 +115,7 @@ public class WalletItemController {
     }
 
     @DeleteMapping(value = "/{walletItemId}")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Response<String>> delete(@PathVariable("walletItemId") Long walletItemId) {
         Response<String> response = new Response<>();
 

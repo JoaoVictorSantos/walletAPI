@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootApplication
-@ActiveProfiles("prod")
 @EnableCaching
 public class WalletApplication {
 

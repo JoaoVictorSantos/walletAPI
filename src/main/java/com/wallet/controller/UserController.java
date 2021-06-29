@@ -5,6 +5,7 @@ import com.wallet.entity.User;
 import com.wallet.response.Response;
 import com.wallet.service.UserService;
 import com.wallet.util.Bcrypt;
+import com.wallet.util.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,8 @@ public class UserController {
         u.setName(dto.getName());
         u.setEmail(dto.getEmail());
         u.setPassword(Bcrypt.getHash(dto.getPassword()));
+        u.setRole(RoleEnum.valueOf(dto.getRole()));
+
         return u;
     }
 
@@ -48,6 +51,8 @@ public class UserController {
         dto.setId(u.getId());
         dto.setName(u.getName());
         dto.setEmail(u.getEmail());
+        dto.setRole(u.getRole().toString());
+
         return dto;
     }
 }
