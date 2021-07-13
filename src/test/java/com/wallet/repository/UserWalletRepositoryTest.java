@@ -3,6 +3,7 @@ package com.wallet.repository;
 import com.wallet.entity.User;
 import com.wallet.entity.UserWallet;
 import com.wallet.entity.Wallet;
+import com.wallet.util.enums.RoleEnum;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +68,7 @@ public class UserWalletRepositoryTest {
         u.setName(NAME);
         u.setEmail("email@teste.com");
         u.setPassword("123456");
+        u.setRole(RoleEnum.ROLE_ADMIN);
 
         return u;
     }
