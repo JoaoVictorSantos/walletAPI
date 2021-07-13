@@ -15,11 +15,11 @@ public class UserDTO {
 
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "O Nome não deve estar em branco")
     @Length(min = 3, max = 50, message = "O Nome deve conter de 3 a 50 caracteres")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "A Senha não deve estar em branco")
     @Length(min = 6, message = "O Senha deve conter pelo meno 6 caracteres")
     private String password;
 

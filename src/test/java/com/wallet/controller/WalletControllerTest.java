@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
@@ -23,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -59,7 +64,7 @@ public class WalletControllerTest {
 
     @Test
     @WithMockUser
-    public void testSaveInvalid() throws Exception{
+    public void testSaveInvalid() throws Exception {
         BDDMockito.given(service.save(Mockito.any(Wallet.class)))
                 .willReturn(getMockWallet());
 
@@ -69,6 +74,26 @@ public class WalletControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors[0]").value("O Nome deve conter pelo meno 3 caracteres."));
+    }
+
+    @Test
+    @WithMockUser
+    public void testFindByName() throws Exception {
+        List<Wallet> list = new ArrayList<>();
+        list.add(getMockWallet());
+
+        Page<Wallet> page = new PageImpl(list);
+
+        BDDMockito.given(service.findByName(Mockito.anyString(), Mockito.anyInt()))
+                .willReturn(page);
+
+        mvc.perform(MockMvcRequestBuilders.get(URL + "?name=" + NAME)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.content[0].id").value(ID))
+                .andExpect(jsonPath("$.data.content[0].name").value(NAME))
+                .andExpect(jsonPath("$.data.content[0].value").value(VALUE));
     }
 
     public Wallet getMockWallet() {
