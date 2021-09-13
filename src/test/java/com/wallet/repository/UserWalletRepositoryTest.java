@@ -58,7 +58,7 @@ public class UserWalletRepositoryTest {
 
         repository.save(uw);
         PageRequest page = PageRequest.of(0, 10);
-''        Page<Wallet> response = repository.findWalletByUserId(1L, page);
+        Page<Wallet> response = repository.findWalletByUserId(1L, page);
         assertNotNull(response);
     }
 
